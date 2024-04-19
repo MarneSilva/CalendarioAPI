@@ -5,8 +5,7 @@ export default async function calendar(app, options) {
     app.get('/data', 
         {
             config: {
-                logMe: true,
-                requireAuthentication: true
+                logMe: true
             }
         }, 
         async (request, reply) => {
@@ -17,8 +16,7 @@ export default async function calendar(app, options) {
     app.get('/data/:data/events', 
         {
             config: {
-                logMe: true,
-                requireAuthentication: true
+                logMe: true
             }
         },
         async (request, reply) => {

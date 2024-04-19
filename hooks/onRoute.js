@@ -1,5 +1,6 @@
 /** @type{import('fastify').FastifyPluginAsync<>} */
-import { extractUser, logMe, checkUser, checkEvent } from './functions/index.js';
+import { extractUser, logMe, checkUser, checkEvent, userIsAdmin } from './functions/index.js';
+
 
 export default async function onRouteHook(app, options) {
     app.addHook('onRoute', (routeOptions) => {
@@ -18,6 +19,9 @@ export default async function onRouteHook(app, options) {
         }
         if(routeOptions.config?.requireAuthentication){
             routeOptions.onRequest.push(extractUser(app))
+        }
+        if(routeOptions.config?.checkAdmin){
+            routeOptions.onRequest.push(userIsAdmin(app))
         }
         if(routeOptions.url === '/register' && routeOptions.method === 'POST'){
             routeOptions.preHandler.push(checkUser(app));

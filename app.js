@@ -15,20 +15,21 @@ export const options = {
     host: process.env.HOST,
     logger: process.env.STAGE === 'dev' ? { transport : { target: 'pino-pretty'} } : false,
     jwt_secret: process.env.JWT_SECRET,
-    db_url: process.env.DB_URL
+    db_url: process.env.DB_URL,
+    ncrypt: process.env.NCRYPT
 };
 
 
 const __filename = fileURLToPath(import.meta.url);
 const __dirname = path.dirname(__filename);
 
-const MyCustomError = createError('MyCustomError', 'Something stranged happened.', 501);
+const MyCustomError = createError('MyCustomError', 'Something stranged happened.', 500);
 
 export async function build(opts){
     const app = fastify(opts);
 
     await app.register(jwt, {
-        secret: opts.jwt_secret
+        secret: 'calendario123'
     });
 
     await app.register(mongodb, {
@@ -56,7 +57,7 @@ export async function build(opts){
     app.setErrorHandler(async (error, request, reply) => {
         const  { validation } = error;
         request.log.error({ error });
-        reply.code(error.statusCode || 500);
+        reply.code(500);
 
         return validation ? `Validation Error: ${validation[0].message}.` : 'Internal Server Error';
     });

@@ -1,4 +1,5 @@
 export * from './logMe.js'
 export * from './extractUser.js'
-export * from './checkUser.js'
-export * from './checkEvent.js'
+export * from './register/checkUser.js'
+export * from './calendar/checkEvent.js'
+export * from './register/userIsAdmin.js'

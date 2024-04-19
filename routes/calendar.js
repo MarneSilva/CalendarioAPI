@@ -5,8 +5,7 @@ export default async function calendar(app, options) {
     app.get('/calendar',
         {
             config: {
-                logMe: true,
-                requireAuthentication: true
+                logMe: true
             }
         },
         async (request, reply) => {

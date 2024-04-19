@@ -29,3 +29,9 @@ export const UNAUTHORIZED_PERSONNEL = createError(
     'The user who is trying to access the route is not admin.',
     401
 )
+
+export const UNATHORIZED_CREDENTIALS= createError(
+    'UNAUTHORIZED_CREDENTIALS',
+    'Credentials of login does not match the database credentials.',
+    401
+)
